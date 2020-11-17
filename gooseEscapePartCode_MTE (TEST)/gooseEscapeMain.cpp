@@ -76,7 +76,7 @@ int main()
     	    movePlayer(keyEntered,player, gameWorld/* game board array and maybe other parameters*/);
 
             // call the goose's chase function
-            //chase(player, monster, gameWorld);
+            chase(player, monster, gameWorld);
 
             // call other functions to do stuff?	    
         }

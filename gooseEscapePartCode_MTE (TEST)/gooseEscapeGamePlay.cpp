@@ -93,8 +93,7 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
 
 // Function that allows the goose to chase the player 
 
-//void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */)
-/*
+void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */)
 {
     int yMove = 0, xMove = 0;
     
@@ -118,7 +117,7 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
       && gameWorld[xMove][yMove] != SHALL_NOT_PASS)
         monster.update_location(xMove, yMove);
 }
-*/
+
 /*
     What other functions do you need to make the game work?  What can you
     add to the basic functionality to make it more fun to play?
