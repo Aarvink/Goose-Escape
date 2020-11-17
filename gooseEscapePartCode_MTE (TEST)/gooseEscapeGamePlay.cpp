@@ -28,7 +28,7 @@ y direction
     The functions should draw characters to present features of the game
     board, e.g. win location, obstacles, power ups
 */
-
+	
 int printGameBoard(Actor const & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])// print the game board function
 {
 	gameWorld[4][4] = WINNER;
@@ -42,7 +42,6 @@ int printGameBoard(Actor const & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])//
 	}
 	
 	terminal_refresh();
-    
 }
 
 /*
@@ -117,6 +116,16 @@ void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD
       && gameWorld[xMove][yMove] != SHALL_NOT_PASS)
         monster.update_location(xMove, yMove);
 }
+
+
+int won_game(Actor & player, Actor & win)
+{
+	if(player.get_x() == win.get_x() && player.get_y() == win.get_y())
+		return 1;
+	else
+		return 0;
+}
+
 
 /*
     What other functions do you need to make the game work?  What can you
