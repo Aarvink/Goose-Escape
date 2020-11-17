@@ -1,5 +1,7 @@
 #include <BearLibTerminal.h>
 #include <cmath>
+#include <ctime>
+#include <cstdlib>
 #include <iostream>
 using namespace std;
 #include "gooseEscapeUtil.hpp"
@@ -12,6 +14,8 @@ Console out;
 
 int main()
 {
+	srand((unsigned) time(0));
+	
 	//Set up the window.  Don't edit these two lines
     terminal_open();
   	terminal_set(SETUP_MESSAGE);
@@ -26,15 +30,17 @@ int main()
 */
  	
     //make the player
-	Actor player(PLAYER_CHAR, 70,10);  // you probably don't want to start in the same place each time
+	Actor player(PLAYER_CHAR);  // you probably don't want to start in the same place each time
+	
+	cout << player.rand_pos(MIN_BOARD_X, MAX_BOARD_X);
 	
 	//make the monster
-	Actor monster(MONSTER_CHAR, MAX_BOARD_X,MAX_BOARD_Y);
+	Actor monster(MONSTER_CHAR);
 	
 	//make win point
-	Actor win(WIN_CHAR, 4 ,4);
+	Actor win(WIN_CHAR);
 	
-    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {0};// Declare the array that will hold the game board "map"
+    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};// Declare the array that will hold the game board "map"
   	
   	
 /*
@@ -43,8 +49,6 @@ int main()
     make sense to store this information in a file?  Should this code be a
     function as well?
 */
-    gameWorld[1][1] = SHALL_NOT_PASS;
-    gameWorld[4][4] = WINNER;
   	
     // Call the function to print the game board
   	printGameBoard(win, gameWorld);
@@ -78,7 +82,7 @@ int main()
     	    movePlayer(keyEntered,player, gameWorld/* game board array and maybe other parameters*/);
 
             // call the goose's chase function
-            chase(player, monster, gameWorld);
+            chase(player, monster, win, gameWorld);
 
             // call other functions to do stuff?	    
         }

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <ctime>
+#include <cstdlib>
 using namespace std;
 #include <BearLibTerminal.h>
 #include "gooseEscapeUtil.hpp"
@@ -92,7 +94,7 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
 
 // Function that allows the goose to chase the player 
 
-void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */)
+void chase(Actor & player, Actor & monster, Actor & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */)
 {
     int yMove = 0, xMove = 0;
     
@@ -102,6 +104,10 @@ void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD
 	        yMove = 1;
 	    else if (player.get_y() < monster.get_y())
 	        yMove = -1;
+	    
+	    int newY = monster.get_y() + yMove;
+	    if(monster.can_move(xMove, yMove) && gameWorld[player.get_x()][newY] != SHALL_NOT_PASS && !(monster.get_x() == win.get_x() && newY == win.get_y()))
+	    	monster.update_location(0, yMove);
 	
 	}
 	if(player.get_x() != monster.get_x())
@@ -110,13 +116,12 @@ void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD
 	        xMove = 1;
 	    else if (player.get_x() < monster.get_x())
 	        xMove = -1;
+	    
+	    int newX = monster.get_x() + xMove;
+	    if(monster.can_move(xMove, 0) && gameWorld[newX][player.get_y()] != SHALL_NOT_PASS && !(newX == win.get_x() && monster.get_y() == win.get_y()))
+	    	monster.update_location(xMove, 0);
 	}
-
-    if (monster.can_move(xMove, yMove) 
-      && gameWorld[xMove][yMove] != SHALL_NOT_PASS)
-        monster.update_location(xMove, yMove);
 }
-
 
 int won_game(Actor & player, Actor & win)
 {
