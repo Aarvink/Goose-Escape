@@ -29,13 +29,19 @@ y direction
     board, e.g. win location, obstacles, power ups
 */
 
-int printGameBoard(Actor const & win)// print the game board function
+int printGameBoard(Actor const & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])// print the game board function
 {
+	gameWorld[4][4] = WINNER;
     win.put_actor();
     
-    //terminal_put(10,10,WIN_CHAR);
-    
-    //terminal_put(10,10,WIN_CHAR);
+    for(int count = 0; count < 10; count++)
+    {
+    	gameWorld[40][8 + count] = SHALL_NOT_PASS;
+    	terminal_put(40, 8 + count, WALL_CHAR);
+    	
+	}
+	
+	terminal_refresh();
     
 }
 
@@ -76,14 +82,19 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
         xMove = -1;
     else if (key == TK_RIGHT)
         xMove = 1;
-        
+    
+    int deltax = player.get_x() + xMove;
+    int deltay = player.get_y() + yMove;
+    
     if (player.can_move(xMove, yMove) 
-      && gameWorld[xMove][yMove] != SHALL_NOT_PASS)
+      && gameWorld[deltax][deltay] != SHALL_NOT_PASS)
         player.update_location(xMove, yMove);
 }
 
 // Function that allows the goose to chase the player 
-void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */)
+
+//void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */)
+/*
 {
     int yMove = 0, xMove = 0;
     
@@ -107,6 +118,7 @@ void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD
       && gameWorld[xMove][yMove] != SHALL_NOT_PASS)
         monster.update_location(xMove, yMove);
 }
+*/
 /*
     What other functions do you need to make the game work?  What can you
     add to the basic functionality to make it more fun to play?

@@ -31,10 +31,10 @@ int main()
 	//make the monster
 	Actor monster(MONSTER_CHAR, 70,20);
 	
-	//make win point
+	//make the win point
 	Actor win(WIN_CHAR, 4,4);
 	
-    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y];// Declare the array that will hold the game board "map"
+    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};// Declare the array that will hold the game board "map"
   	
 /*
     Initiallize locations in the game board to have game features.  What if you
@@ -42,10 +42,9 @@ int main()
     make sense to store this information in a file?  Should this code be a
     function as well?
 */
-    gameWorld[1][1] = SHALL_NOT_PASS;
-    gameWorld[4][4] = WINNER;
-  	
+    
     // Call the function to print the game board
+  	printGameBoard(win, gameWorld);
   	
 	// Printing the instructions
     out.writeLine("Escape the Goose! " + monster.get_location_string());
@@ -77,7 +76,7 @@ int main()
     	    movePlayer(keyEntered,player, gameWorld/* game board array and maybe other parameters*/);
 
             // call the goose's chase function
-            chase(player, monster, gameWorld);
+            //chase(player, monster, gameWorld);
 
             // call other functions to do stuff?	    
         }

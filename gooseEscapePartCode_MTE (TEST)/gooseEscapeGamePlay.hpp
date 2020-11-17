@@ -34,7 +34,7 @@ const int WIN_CHAR = int('%'); //% sign, a special character used in the ancient
     Game play function prototypes are give below.
 */
 
-int printGameBoard(Actor const & win);// print the game board function protype
+int printGameBoard(Actor const & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]);// print the game board function protype
 
 /*
     Do something when the goose captures the player
