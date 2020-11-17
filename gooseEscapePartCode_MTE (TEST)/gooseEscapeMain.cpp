@@ -34,7 +34,7 @@ int main()
 	//make win point
 	Actor win(WIN_CHAR, 4 ,4);
 	
-    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y];// Declare the array that will hold the game board "map"
+    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {0};// Declare the array that will hold the game board "map"
   	
   	
 /*
@@ -47,6 +47,7 @@ int main()
     gameWorld[4][4] = WINNER;
   	
     // Call the function to print the game board
+  	printGameBoard(win, gameWorld);
   	
 	// Printing the instructions
     out.writeLine("Escape the Goose! " + monster.get_location_string());

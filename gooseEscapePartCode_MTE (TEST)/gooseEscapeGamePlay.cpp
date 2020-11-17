@@ -28,12 +28,7 @@ y direction
     The functions should draw characters to present features of the game
     board, e.g. win location, obstacles, power ups
 */
-
-<<<<<<< HEAD
-int printGameBoard(int & gameWorld)// print the game board function
-{
 	
-=======
 int printGameBoard(Actor const & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])// print the game board function
 {
 	gameWorld[4][4] = WINNER;
@@ -47,8 +42,6 @@ int printGameBoard(Actor const & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])//
 	}
 	
 	terminal_refresh();
->>>>>>> 559cc8c4da539153b5608618cf2329bfa6678551
-    
 }
 
 /*
@@ -99,8 +92,7 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
 
 // Function that allows the goose to chase the player 
 
-//void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */)
-/*
+void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */)
 {
     int yMove = 0, xMove = 0;
     
@@ -124,7 +116,6 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
       && gameWorld[xMove][yMove] != SHALL_NOT_PASS)
         monster.update_location(xMove, yMove);
 }
-<<<<<<< HEAD
 
 int won_game(Actor & player, Actor & win)
 {
@@ -133,9 +124,7 @@ int won_game(Actor & player, Actor & win)
 	else
 		return 0;
 }
-=======
-*/
->>>>>>> 559cc8c4da539153b5608618cf2329bfa6678551
+
 /*
     What other functions do you need to make the game work?  What can you
     add to the basic functionality to make it more fun to play?
