@@ -95,7 +95,7 @@ void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD
 	        yMove = -1;
 	
 	}
-	else if(player.get_x() != monster.get_x())
+	if(player.get_x() != monster.get_x())
 	{
 		if (player.get_x() > monster.get_x())
 	        xMove = 1;
