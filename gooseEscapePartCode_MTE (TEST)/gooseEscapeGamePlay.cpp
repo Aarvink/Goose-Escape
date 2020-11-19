@@ -123,7 +123,7 @@ void chase(Actor & player, Actor & monster, Actor & win, int gameWorld[MAX_BOARD
 	}
 }
 
-int won_game(Actor & player, Actor & win)
+bool won_game(Actor & player, Actor & win)
 {
 	if(player.get_x() == win.get_x() && player.get_y() == win.get_y())
 		return 1;

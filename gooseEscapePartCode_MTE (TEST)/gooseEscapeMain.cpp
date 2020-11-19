@@ -1,6 +1,6 @@
 #include <BearLibTerminal.h>
 #include <cmath>
-#include <ctime>
+#include <ctime> //for the random seed
 #include <cstdlib>
 #include <iostream>
 using namespace std;
@@ -14,6 +14,7 @@ Console out;
 
 int main()
 {
+	//putting in the random seed-the starting point for random numbers
 	srand((unsigned) time(0));
 	
 	//Set up the window.  Don't edit these two lines
@@ -29,18 +30,18 @@ int main()
     you have added to the Actor class.
 */
  	
+ 	//following constructors generate random position
     //make the player
-	Actor player(PLAYER_CHAR);  // you probably don't want to start in the same place each time
-	
-	cout << player.rand_pos(MIN_BOARD_X, MAX_BOARD_X);
-	
+	Actor player(PLAYER_CHAR);
+		
 	//make the monster
 	Actor monster(MONSTER_CHAR);
 	
 	//make win point
 	Actor win(WIN_CHAR);
 	
-    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};// Declare the array that will hold the game board "map"
+	// Declare the array that will hold the game board "map"
+    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
   	
   	
 /*
