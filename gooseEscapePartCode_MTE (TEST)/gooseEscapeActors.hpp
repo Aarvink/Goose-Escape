@@ -1,3 +1,7 @@
+/*
+Start of file - gooseEscapeActors.hpp
+*/
+
 #ifndef GOOSE_ESCAPE_ACTORS
 #define GOOSE_ESCAPE_ACTORS
 #include <cmath>
@@ -122,3 +126,7 @@ class Actor
     
 };
 #endif
+
+/*
+End of file - gooseEscapeActors.hpp
+*/

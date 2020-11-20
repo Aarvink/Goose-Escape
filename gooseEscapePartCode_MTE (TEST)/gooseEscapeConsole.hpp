@@ -1,4 +1,8 @@
 /*
+Start of file - gooseEscapeConsole.hpp
+*/
+
+/*
     STUDENTS: Don't change the code in this file (unless you are very
                 comfortable with using the BearLibTerminal) 
 */ 
@@ -73,3 +77,6 @@ class Console
 };
 #endif
 
+/*
+End of file - gooseEscapeConsole.hpp
+*/
