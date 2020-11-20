@@ -1,6 +1,6 @@
 /* 
 
-Begining of file - goosEscapeGamePlay.cpp
+Begining of file - gooseEscapeGamePlay.cpp
 
 */
 
@@ -160,6 +160,6 @@ bool won_game(Actor & player, Actor & win)
 
 /* 
 
-End of file - goosEscapeGamePlay.cpp
+End of file - gooseEscapeGamePlay.cpp
 
 */
