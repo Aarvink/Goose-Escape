@@ -37,12 +37,9 @@ y direction
     board, e.g. win location, obstacles, power ups
 */
 
-// print the game board function
-int printGameBoard(Actor const & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])
+//print the game board function
+int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])
 {
-	gameWorld[4][4] = WINNER;// sets the location (TALK TO CAMERON)
-    win.put_actor();
-    
     //create a vertical wall of 10 tiles on the game board
     for(int count = 0; count < 10; count++)
     {
@@ -63,7 +60,7 @@ int printGameBoard(Actor const & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])
     updated.  Run, use weapons, it's up to you!
 */
 
-// function that allows the goose to capture the player
+//function that allows the goose to capture the player
 bool captured(Actor const & player, Actor const & monster)
 {
 	//checks if the location of the goose is the same as the player

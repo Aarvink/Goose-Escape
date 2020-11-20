@@ -16,7 +16,7 @@ const int WALL_CHAR = int('o');
 const int WIN_CHAR = int('%');
 
 // print the game board function protype
-int printGameBoard(Actor const & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]);
+int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]);
 
 /*
     Do something when the goose captures the player
