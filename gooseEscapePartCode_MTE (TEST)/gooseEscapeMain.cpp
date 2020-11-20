@@ -1,3 +1,9 @@
+/* 
+
+Begining of file - goosEscapeMain.cpp
+
+*/
+
 #include <BearLibTerminal.h>
 #include <cmath>
 #include <ctime> //for the random seed
@@ -31,17 +37,19 @@ int main()
 */
  	
  	//following constructors generate random position
-    //make the player
+    
+	//make the player
 	Actor player(PLAYER_CHAR);
 		
 	//make the monster
-	Actor monster(MONSTER_CHAR);
+	Actor monster(MONSTER_CHAR);// start goose in a random set of coordinates
 	
 	//make win point
-	Actor win(WIN_CHAR);
+	Actor win(WIN_CHAR);// start the win point in a random set of coordinates
 	
 	// Declare the array that will hold the game board "map"
     int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
+
   	
   	
 /*
@@ -69,7 +77,7 @@ int main()
     All key presses start with "TK_" then the character.  So "TK_A" is the "a"
     key being pressed.
 */
-    int keyEntered = TK_A;  // can be any valid value that is not ESCAPE or CLOSE
+    int keyEntered = TK_A; // can be any valid value that is not ESCAPE or CLOSE
     
     while(keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE 
         	&& !captured(player,monster) && !won_game(player, win))
@@ -79,13 +87,11 @@ int main()
 
         if (keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE)
         {
-            // move the player, you can modify this function
-    	    movePlayer(keyEntered,player, gameWorld/* game board array and maybe other parameters*/);
+            // call the player's move function
+    	    movePlayer(keyEntered,player, gameWorld); // moves the player
 
             // call the goose's chase function
-            chase(player, monster, win, gameWorld);
-
-            // call other functions to do stuff?	    
+            chase(player, monster, win, gameWorld);// moves the goose	    
         }
   	}
 
@@ -94,8 +100,7 @@ int main()
       	//once we're out of the loop, the game is over
         out.writeLine("Game has ended");
     
-        // output why:  did the goose get us, or did we get to the win location?
-        // Outputs whether the player reached the win point or was captured
+        // outputs whether the player reached the win point or was captured
 		if(captured(player,monster))
 		{
 			out.writeLine("You were CAPTURED!");
@@ -104,10 +109,17 @@ int main()
 		{
 			out.writeLine("You WIN!");
 		}
+		
     	// Wait until user closes the window
         while (terminal_read() != TK_CLOSE);
     }
-
+    
 	//game is done, close it  
     terminal_close();
 }
+
+/* 
+
+End of file - goosEscapeMain.cpp
+
+*/

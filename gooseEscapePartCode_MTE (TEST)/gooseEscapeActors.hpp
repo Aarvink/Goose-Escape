@@ -6,6 +6,19 @@
 #include <BearLibTerminal.h>
 #include "gooseEscapeUtil.hpp"
 
+/*
+    Modify this class to contain more characteristics of the "actor".  Add
+    functions that will be useful for playing the game that are specific to
+    the Actor.
+    
+    Feel free to add additional Classes to your program.
+*/
+
+/* 
+    Going further:  Learn the other syntax for implementing a class that is
+    more appropriate for working with multiple files, and improve the class code.
+*/
+
 class Actor
 {
   private:
@@ -29,14 +42,12 @@ class Actor
         update_location(x0,y0);
     }
     
-    //new constructor-takes char, gives random poisition
     Actor(char initPlayerChar)
     {
 		change_char(initPlayerChar);
     	
-    	const int border_dist = 5; //don't want to spawn on border
+    	const int border_dist = 5;
     	
-    	//uses the random position function
 		int x0 = rand_pos(MIN_BOARD_X+border_dist, MAX_BOARD_X-border_dist);
     	int y0 = rand_pos(MIN_BOARD_Y+border_dist, MAX_BOARD_Y-border_dist);
     	    	
@@ -48,10 +59,6 @@ class Actor
     
     int rand_pos(int min, int max)
 	{
-		/*Takes random generated number then puts it in the range
-		from min to max instead of using a more inefficient do-while
-		Learned in previous class. 
-		*/
 		return rand()%max + min-1;
 	}
     
