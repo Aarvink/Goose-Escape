@@ -65,7 +65,7 @@ bool captured(Actor const & player, Actor const & monster)
 {
 	//checks if the location of the goose is the same as the player
     return (player.get_x() == monster.get_x() 
-         && player.get_y() == monster.get_y());
+         	&& player.get_y() == monster.get_y());
 }
 
 /*
@@ -98,7 +98,7 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
     
     //checks to see if it is a valid location to move to
     if (player.can_move(xMove, yMove) 
-      && gameWorld[deltax][deltay] != SHALL_NOT_PASS)
+      	&& gameWorld[deltax][deltay] != SHALL_NOT_PASS)
         player.update_location(xMove, yMove);
 }
 
