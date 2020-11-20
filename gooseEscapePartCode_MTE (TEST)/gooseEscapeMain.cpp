@@ -6,7 +6,7 @@ Begining of file - goosEscapeMain.cpp
 
 #include <BearLibTerminal.h>
 #include <cmath>
-#include <ctime>
+#include <ctime> //for the random seed
 #include <cstdlib>
 #include <iostream>
 using namespace std;
@@ -20,6 +20,7 @@ Console out;
 
 int main()
 {
+	//putting in the random seed-the starting point for random numbers
 	srand((unsigned) time(0));
 	
 	//Set up the window.  Don't edit these two lines
@@ -35,19 +36,20 @@ int main()
     you have added to the Actor class.
 */
  	
-    //make the player
-	Actor player(PLAYER_CHAR); // start player in a random set of coordinates
-	
-	cout << player.rand_pos(MIN_BOARD_X, MAX_BOARD_X);
-	
+ 	//following constructors generate random position
+    
+	//make the player
+	Actor player(PLAYER_CHAR);
+		
 	//make the monster
 	Actor monster(MONSTER_CHAR);// start goose in a random set of coordinates
 	
 	//make win point
 	Actor win(WIN_CHAR);// start the win point in a random set of coordinates
 	
-	//declares the array that will hold the game board "map"
-    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY}; 
+	// Declare the array that will hold the game board "map"
+    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
+
   	
   	
 /*
