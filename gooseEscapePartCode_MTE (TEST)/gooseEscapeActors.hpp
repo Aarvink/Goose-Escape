@@ -42,12 +42,14 @@ class Actor
         update_location(x0,y0);
     }
     
+    //new constructor-creates actor with random position
     Actor(char initPlayerChar)
     {
 		change_char(initPlayerChar);
     	
     	const int border_dist = 5;
     	
+    	//assigns a random position to the actor
 		int x0 = rand_pos(MIN_BOARD_X+border_dist, MAX_BOARD_X-border_dist);
     	int y0 = rand_pos(MIN_BOARD_Y+border_dist, MAX_BOARD_Y-border_dist);
     	    	
@@ -57,8 +59,13 @@ class Actor
 		update_location(x0, y0);
 	}
     
+    //returns a random number between a range
     int rand_pos(int min, int max)
 	{
+		/*
+		returns a value between max and min without using do-while to \
+		find valid position
+		*/
 		return rand()%max + min-1;
 	}
     
