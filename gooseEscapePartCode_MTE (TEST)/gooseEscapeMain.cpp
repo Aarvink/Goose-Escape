@@ -39,7 +39,7 @@ int main()
  	//following constructors generate random position
     
 	//make the player
-	Actor player(PLAYER_CHAR);
+	Actor player(PLAYER_CHAR);// start player in a random set of coordinates
 		
 	//make the monster
 	Actor monster(MONSTER_CHAR);// start goose in a random set of coordinates
