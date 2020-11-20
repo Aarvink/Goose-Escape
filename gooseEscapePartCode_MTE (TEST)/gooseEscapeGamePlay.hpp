@@ -1,3 +1,9 @@
+/*
+Start of file - gooseEscapeGamePlay.hpp
+*/
+
+
+
 #ifndef GOOSE_ESCAPE_GAMEPLAY
 #define GOOSE_ESCAPE_GAMEPLAY
 #include "gooseEscapeUtil.hpp"
@@ -42,3 +48,7 @@ name is better suited for its purpose.
 bool won_game(Actor & player, Actor & win);
 
 #endif
+
+/*
+End of file - gooseEscapeGamePlay.hpp
+*/

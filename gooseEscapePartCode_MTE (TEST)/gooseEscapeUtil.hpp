@@ -1,3 +1,7 @@
+/*
+Start of file - gooseEscapeUtil.hpp
+*/
+
 //STUDENTS: Be very careful if you decide to change these values
 
 #ifndef GOOSE_UTIL
@@ -42,3 +46,7 @@ const int MAX_CONSOLE_X = MAX_SCREEN_X;
 const int MAX_CONSOLE_Y = MAX_SCREEN_Y;
 
 #endif
+
+/*
+End of file - gooseEscapeUtil.hpp
+*/
