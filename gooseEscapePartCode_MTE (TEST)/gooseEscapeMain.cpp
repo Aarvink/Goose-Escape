@@ -1,6 +1,6 @@
 /* 
 
-Begining of file - goosEscapeMain.cpp
+Begining of file - gooseEscapeMain.cpp
 
 */
 
@@ -121,6 +121,6 @@ int main()
 
 /* 
 
-End of file - goosEscapeMain.cpp
+End of file - gooseEscapeMain.cpp
 
 */
