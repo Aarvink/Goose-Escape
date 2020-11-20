@@ -1,5 +1,13 @@
+/* 
+
+Begining of file - goosEscapeMain.cpp
+
+*/
+
 #include <BearLibTerminal.h>
 #include <cmath>
+#include <ctime>
+#include <cstdlib>
 #include <iostream>
 using namespace std;
 #include "gooseEscapeUtil.hpp"
@@ -12,6 +20,8 @@ Console out;
 
 int main()
 {
+	srand((unsigned) time(0));
+	
 	//Set up the window.  Don't edit these two lines
     terminal_open();
   	terminal_set(SETUP_MESSAGE);
@@ -26,15 +36,18 @@ int main()
 */
  	
     //make the player
-	Actor player(PLAYER_CHAR, 70,10);  // you probably don't want to start in the same place each time
+	Actor player(PLAYER_CHAR); // start player in a random set of coordinates
+	
+	cout << player.rand_pos(MIN_BOARD_X, MAX_BOARD_X);
 	
 	//make the monster
-	Actor monster(MONSTER_CHAR, MAX_BOARD_X,MAX_BOARD_Y);
+	Actor monster(MONSTER_CHAR);// start goose in a random set of coordinates
 	
 	//make win point
-	Actor win(WIN_CHAR, 4 ,4);
+	Actor win(WIN_CHAR);// start the win point in a random set of coordinates
 	
-    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {0};// Declare the array that will hold the game board "map"
+	//declares the array that will hold the game board "map"
+    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY}; 
   	
   	
 /*
@@ -43,8 +56,6 @@ int main()
     make sense to store this information in a file?  Should this code be a
     function as well?
 */
-    gameWorld[1][1] = SHALL_NOT_PASS;
-    gameWorld[4][4] = WINNER;
   	
     // Call the function to print the game board
   	printGameBoard(win, gameWorld);
@@ -64,7 +75,7 @@ int main()
     All key presses start with "TK_" then the character.  So "TK_A" is the "a"
     key being pressed.
 */
-    int keyEntered = TK_A;  // can be any valid value that is not ESCAPE or CLOSE
+    int keyEntered = TK_A; // can be any valid value that is not ESCAPE or CLOSE
     
     while(keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE 
         	&& !captured(player,monster) && !won_game(player, win))
@@ -74,13 +85,11 @@ int main()
 
         if (keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE)
         {
-            // move the player, you can modify this function
-    	    movePlayer(keyEntered,player, gameWorld/* game board array and maybe other parameters*/);
+            // call the player's move function
+    	    movePlayer(keyEntered,player, gameWorld); // moves the player
 
             // call the goose's chase function
-            chase(player, monster, gameWorld);
-
-            // call other functions to do stuff?	    
+            chase(player, monster, win, gameWorld);// moves the goose	    
         }
   	}
 
@@ -89,8 +98,7 @@ int main()
       	//once we're out of the loop, the game is over
         out.writeLine("Game has ended");
     
-        // output why:  did the goose get us, or did we get to the win location?
-        // Outputs whether the player reached the win point or was captured
+        // outputs whether the player reached the win point or was captured
 		if(captured(player,monster))
 		{
 			out.writeLine("You were CAPTURED!");
@@ -99,10 +107,17 @@ int main()
 		{
 			out.writeLine("You WIN!");
 		}
+		
     	// Wait until user closes the window
         while (terminal_read() != TK_CLOSE);
     }
-
+    
 	//game is done, close it  
     terminal_close();
 }
+
+/* 
+
+End of file - goosEscapeMain.cpp
+
+*/

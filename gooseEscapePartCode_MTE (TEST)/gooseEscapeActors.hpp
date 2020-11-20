@@ -1,6 +1,8 @@
 #ifndef GOOSE_ESCAPE_ACTORS
 #define GOOSE_ESCAPE_ACTORS
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <BearLibTerminal.h>
 #include "gooseEscapeUtil.hpp"
 
@@ -39,6 +41,26 @@ class Actor
         location_y = MIN_SCREEN_Y;
         update_location(x0,y0);
     }
+    
+    Actor(char initPlayerChar)
+    {
+		change_char(initPlayerChar);
+    	
+    	const int border_dist = 5;
+    	
+		int x0 = rand_pos(MIN_BOARD_X+border_dist, MAX_BOARD_X-border_dist);
+    	int y0 = rand_pos(MIN_BOARD_Y+border_dist, MAX_BOARD_Y-border_dist);
+    	    	
+    	location_x = 0;
+    	location_y = 0;
+    	
+		update_location(x0, y0);
+	}
+    
+    int rand_pos(int min, int max)
+	{
+		return rand()%max + min-1;
+	}
     
     int get_x() const
     {

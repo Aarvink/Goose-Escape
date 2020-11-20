@@ -64,7 +64,7 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
     add to the basic functionality to make it more fun to play?
 */
 
-void chase(Actor & player, Actor & monster, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */);
+void chase(Actor & player, Actor & monster, Actor & win, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] /* game board array and any other parameters */);
 
 int won_game(Actor & player, Actor & win);
 #endif
