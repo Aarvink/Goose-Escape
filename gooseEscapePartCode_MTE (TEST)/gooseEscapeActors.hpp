@@ -28,10 +28,12 @@ class Actor
   private:
     int actorChar;      
     int location_x, location_y;
+    int lives; //the new data member
 
   public:
     Actor()
     {
+    	lives = 3;
         actorChar = int('A');
         location_x = MIN_SCREEN_X;
         location_y = MIN_SCREEN_Y;
@@ -40,6 +42,7 @@ class Actor
 
     Actor(char initPlayerChar, int x0, int y0)
     {
+    	lives = 3;
         change_char(initPlayerChar);
         location_x = MIN_SCREEN_X;
         location_y = MIN_SCREEN_Y;
@@ -49,6 +52,8 @@ class Actor
     //new constructor-creates actor with random position
     Actor(char initPlayerChar)
     {
+    	lives = 3;
+    	
 		change_char(initPlayerChar);
     	
     	const int border_dist = 5;
@@ -61,6 +66,39 @@ class Actor
     	location_y = 0;
     	
 		update_location(x0, y0);
+	}
+	
+	//if the actor has lives, this will be true
+	int lives_left() const
+	{
+		if(lives > 0)
+			return lives;
+		else
+			return 0;	
+	}
+    
+    //call this when the actor is caught
+    void caught()
+	{
+		
+		for(int iter = 0; iter < lives; iter++)
+    	{
+    		terminal_put(iter, MAX_BOARD_Y, ' ');
+    		terminal_refresh();
+		}
+		
+    	lives -= 1;
+    	
+    	const int border_dist = 5;
+    	
+    	int x0 = rand_pos(MIN_BOARD_X+border_dist, MAX_BOARD_X-border_dist);
+    	int y0 = rand_pos(MIN_BOARD_Y+border_dist, MAX_BOARD_Y-border_dist);
+    	    	
+    	location_x = 0;
+    	location_y = 0;
+    	
+		update_location(x0, y0);
+    	
 	}
     
     //returns a random number between a range
@@ -92,6 +130,16 @@ class Actor
         formatted_location += string(buffer) + ")";
         return formatted_location;
     }
+    
+    void display_lives()
+    {
+		const int heart = int('^');
+		for(int iter = 0; iter < lives; iter++)
+		{
+			terminal_put(iter, MAX_BOARD_Y, heart);
+        	terminal_refresh();
+		}
+	}
     
     void change_char(char new_actor_char)
     {

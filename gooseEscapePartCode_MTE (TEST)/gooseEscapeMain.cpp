@@ -79,10 +79,14 @@ int main()
 */
     int keyEntered = TK_A; // can be any valid value that is not ESCAPE or CLOSE
     
+	
+    
     //check if player has been captured, won or pressed a certain key
     while(keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE 
         	&& !captured(player,monster) && !won_game(player, win))
 	{
+		player.display_lives();
+		
 	    //get player key press
 	    keyEntered = terminal_read();
 

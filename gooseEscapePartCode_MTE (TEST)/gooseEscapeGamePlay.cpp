@@ -61,11 +61,20 @@ int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])
 */
 
 //function that allows the goose to capture the player
-bool captured(Actor const & player, Actor const & monster)
+bool captured(Actor & player, Actor & monster)
 {
-	//checks if the location of the goose is the same as the player
-    return (player.get_x() == monster.get_x() 
-         	&& player.get_y() == monster.get_y());
+	
+	if((player.get_x() == monster.get_x() 
+        && player.get_y() == monster.get_y())){
+		if(player.lives_left()){
+			player.caught();
+			//cout << player.lives_left();
+			return 0;
+		}else
+			return 1;
+	}
+	
+	return 0;
 }
 
 /*
@@ -134,7 +143,7 @@ void chase(Actor & player, Actor & monster, Actor & win,
 	    else if (player.get_x() < monster.get_x())
 	        xMove = -1;
 	    
-	    //checks if the new location to move to is valid
+	    //checks if the new goose location to move to is valid
 	    int newX = monster.get_x() + xMove;
 	    if(monster.can_move(xMove, 0) && 
 			gameWorld[newX][player.get_y()] != SHALL_NOT_PASS && 

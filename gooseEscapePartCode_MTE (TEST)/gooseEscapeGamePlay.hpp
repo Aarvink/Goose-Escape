@@ -32,7 +32,7 @@ int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]);
     then fight.  You could add a health to the Actor class that is
     updated.  Run, use weapons, it's up to you!
 */
-bool captured(Actor const & player, Actor const & monster);
+bool captured(Actor & player, Actor & monster);
 
 void movePlayer(int key, Actor & player, 
 int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]);
