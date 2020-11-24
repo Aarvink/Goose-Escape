@@ -64,7 +64,7 @@ class Actor
 	}
     
     //returns a random number between a range
-    int rand_pos(int min, int max)
+    int rand_pos(int min, int max) const
 	{
 		/*
 		returns a value between max and min without using do-while to \
