@@ -8,6 +8,8 @@ Begining of file - gooseEscapeGamePlay.cpp
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
+#include <string>
+#include <fstream>
 using namespace std;
 #include <BearLibTerminal.h>
 #include "gooseEscapeUtil.hpp"
@@ -38,14 +40,38 @@ y direction
 */
 
 //print the game board function
-int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])
-{
+int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], ifstream & levels)
+{	
     //create a vertical wall of 10 tiles on the game board
-    for(int count = 0; count < 10; count++)
-    {
-    	gameWorld[40][8 + count] = SHALL_NOT_PASS;
-    	terminal_put(40, 8 + count, WALL_CHAR);
-    	
+//    for(int count = 0; count < 10; count++)
+//    {
+//    	gameWorld[40][8 + count] = SHALL_NOT_PASS;
+//    	terminal_put(40, 8 + count, WALL_CHAR);
+//    	
+//	}
+	
+	string line_in;
+	
+	int x_pos = 0, y_pos = 0;
+		
+	for(int newlines = 0; newlines < MAX_BOARD_Y; newlines++)
+	{
+		x_pos = 0;
+		getline(levels, line_in);
+		
+		if(!(line_in[0] == 0))
+		{
+			for(int iter_str = 0; iter_str < line_in.size(); iter_str++)
+			{
+				if(line_in[iter_str] == WALL_CHAR && x_pos < MAX_BOARD_X && y_pos < MAX_BOARD_Y && x_pos > MIN_BOARD_X && y_pos > MIN_BOARD_Y)
+				{
+					gameWorld[x_pos][y_pos] = SHALL_NOT_PASS;
+					terminal_put(x_pos, y_pos, WALL_CHAR);
+				}
+				x_pos++;
+			}
+			y_pos++;
+		}
 	}
 	
 	terminal_refresh();
@@ -117,6 +143,8 @@ void chase(Actor & player, Actor & monster, Actor & win,
 {
     int yMove = 0, xMove = 0;
     
+    int newY = 0, newX = 0;
+    
     //checks if the goose's y-coordinate is not the same as the player's
     if(player.get_y() != monster.get_y())
     {
@@ -128,8 +156,8 @@ void chase(Actor & player, Actor & monster, Actor & win,
 	    
 	    //checks if the new location to move to is valid
 	    int newY = monster.get_y() + yMove;
-	    if(monster.can_move(xMove, yMove) && 
-			gameWorld[player.get_x()][newY] != SHALL_NOT_PASS && 
+	    if(monster.can_move(0, yMove) && 
+			gameWorld[monster.get_x()][newY] != SHALL_NOT_PASS && 
 			!(monster.get_x() == win.get_x() && newY == win.get_y()))
 	    	monster.update_location(0, yMove);
 	
@@ -146,10 +174,12 @@ void chase(Actor & player, Actor & monster, Actor & win,
 	    //checks if the new goose location to move to is valid
 	    int newX = monster.get_x() + xMove;
 	    if(monster.can_move(xMove, 0) && 
-			gameWorld[newX][player.get_y()] != SHALL_NOT_PASS && 
+			gameWorld[newX][monster.get_y()] != SHALL_NOT_PASS && 
 			!(newX == win.get_x() && monster.get_y() == win.get_y()))
 	    	monster.update_location(xMove, 0);
 	}
+
+
 }
 
 //function that allows the player to win

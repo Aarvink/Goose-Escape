@@ -9,6 +9,7 @@ Begining of file - gooseEscapeMain.cpp
 #include <ctime> //for the random seed
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 using namespace std;
 #include "gooseEscapeUtil.hpp"
 #include "gooseEscapeActors.hpp"
@@ -50,7 +51,13 @@ int main()
 	//declare the array that will hold the game board "map"
     int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
 
+  	ifstream levels("levels.txt");
   	
+  	if(!levels)
+  	{
+  		cout << "files not opened" << endl;
+  		return EXIT_FAILURE;
+	}
   	
 /*
     Initiallize locations in the game board to have game features.  What if you
@@ -60,7 +67,7 @@ int main()
 */
   	
     // Call the function to print the game board
-  	printGameBoard(gameWorld);
+  	printGameBoard(gameWorld, levels);
   	
 	// Printing the instructions
     out.writeLine("Escape the Goose! " + monster.get_location_string());
@@ -118,6 +125,9 @@ int main()
     	// Wait until user closes the window
         while (terminal_read() != TK_CLOSE);
     }
+    
+    //close the file
+    levels.close();
     
 	//game is done, close it  
     terminal_close();
