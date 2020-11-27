@@ -90,10 +90,10 @@ int main()
 	  	
 	
 		// Printing the instructions
-	    out.writeLine("Escape the Goose! "+monster.get_location_string());
+	    out.writeLine("Escape the Goose! If won level, close window");
 		out.writeLine("Move w/ arrow keys. Lives (^) on bottom left");
-		out.writeLine("Caught = lose life. 3 lives. 0 lives=lose");
-		out.writeLine("Press Z=electric fence. If won level close window to get new level");
+		out.writeLine("Caught=lose life. 3 lives. 0 lives=lose");
+		out.writeLine("Press Z=electric fence. X=wall");
 	
 	/*
 	    This is the main game loop.  It continues to let the player give input
@@ -128,10 +128,12 @@ int main()
 	            chase(player, monster, win, gameWorld);// moves the goose	    
 	        }
 	        
+	        //limits the amount of electric fences you can use
 	        if(totalFence < 2 && keyEntered == TK_Z)
 	        {
 	        	totalFence += electricFencePlacement(gameWorld, player);
 			}
+			//limits the number of walls you can use
 			if(totalWall < 1 && keyEntered == TK_X)
 	        {	
 	        	totalWall += wallPlacement(gameWorld, player);
