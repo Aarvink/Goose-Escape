@@ -202,7 +202,7 @@ bool won_game(Actor & player, Actor & win, ifstream & winScreen)
 		{
 			for(int col = 0; col < MAX_BOARD_X; col++)
 			{
-				terminal_put(col, row, NOTHING_CHAR);
+				terminal_put(col, row, WALL_CHAR);
 			}
 		}
 		

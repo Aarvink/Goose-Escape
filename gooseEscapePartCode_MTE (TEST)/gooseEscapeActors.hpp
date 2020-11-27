@@ -52,7 +52,8 @@ class Actor
     //new constructor-creates actor with random position
     Actor(char initPlayerChar)
     {
-    	lives = 3;
+    	const int MAX_LIVES = 3;
+    	lives = MAX_LIVES;
     	
 		change_char(initPlayerChar);
     	
@@ -74,7 +75,7 @@ class Actor
 		if(lives > 0)
 			return lives;
 		else
-			return 0;	
+			return 0;
 	}
     
     //call this when the actor is caught
