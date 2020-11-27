@@ -13,7 +13,7 @@ CursorRow=136
 TopLine=140
 LeftChar=1
 <<<<<<< HEAD
-Focused=5
+Focused=0
 =======
 Focused=0
 >>>>>>> 5be5312b0d2919393b18399e70a3a39599388863
@@ -42,9 +42,9 @@ Focused=5
 [Editor_0]
 <<<<<<< HEAD
 <<<<<<< HEAD
-CursorCol=27
-CursorRow=131
-TopLine=50
+CursorCol=4
+CursorRow=140
+TopLine=151
 =======
 CursorCol=5
 CursorRow=141
@@ -84,7 +84,7 @@ LeftChar=1
 <<<<<<< HEAD
 CursorCol=2
 CursorRow=262
-TopLine=252
+TopLine=241
 =======
 CursorCol=50
 CursorRow=176

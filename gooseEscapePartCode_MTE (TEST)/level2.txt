@@ -1,6 +1,8 @@
-ooo
- oooooo oooooo
-
-                 oooooooooooooooooo
-  ooooooooooooo
-ooooo  ooooo
+ 
+ooooooo oooooo      ooo    o    o   ooooo                             
+   o    o     o    o   o   oo   o  o                  
+   o    o     o   o     o  o o  o  o                           
+   o    oooooo   o       o o  o o   ooooo                                   
+   o    o    o    o     o  o   oo        o                                
+   o    o     o    ooooo   o    o   ooooo                                         
+ 
