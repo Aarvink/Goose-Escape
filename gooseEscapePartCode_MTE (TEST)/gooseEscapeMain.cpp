@@ -51,13 +51,15 @@ int main()
 	//declare the array that will hold the game board "map"
     int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
 	
+	//declare variables to limit amount of fence and walls placed
 	int totalFence = 0;
-
+	int totalWall = 0;
 	
+	//input file
   	ifstream levels("levels.txt");
-  	ifstream winScreen("winScreen.txt");
   	
-  	if(!levels || !winScreen)
+  	//check if file opened correctly
+  	if(!levels)
   	{
   		cout << "files not opened" << endl;
   		return EXIT_FAILURE;
@@ -90,7 +92,7 @@ int main()
         
     //check if player has been captured, won or pressed a certain key
     while(keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE 
-        	&& !captured(player,monster) && !won_game(player, win, winScreen))
+        	&& !captured(player,monster) && !won_game(player, win))
 	{
 		player.display_lives();
 		
@@ -114,6 +116,11 @@ int main()
         	totalFence += electricFencePlacement(gameWorld, player);
 		}
 		
+		if(totalWall < 1 && keyEntered == TK_X)
+        {	
+        	totalWall += wallPlacement(gameWorld, player);
+		}
+		
   	}
 
     if (keyEntered != TK_CLOSE)
@@ -126,7 +133,7 @@ int main()
 		{
 			out.writeLine("You were CAPTURED!");
 		}
-		else if(won_game(player, win, winScreen))
+		else if(won_game(player, win))
 		{
 			out.writeLine("You WIN!");
 		}

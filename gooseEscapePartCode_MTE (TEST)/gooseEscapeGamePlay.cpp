@@ -191,7 +191,7 @@ void chase(Actor & player, Actor & monster, Actor & win,
 }
 
 //function that allows the player to win
-bool won_game(Actor & player, Actor & win, ifstream & winScreen)
+bool won_game(Actor & player, Actor & win)
 {
 	
 	const int SIZE_OF_STRING = 14;
@@ -239,7 +239,23 @@ int electricFencePlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & play
   
 }
 
+int wallPlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & player)
+{
 
+	int x_pos = player.get_x();
+	int y_pos = player.get_y();
+	
+	terminal_put(x_pos-1, y_pos, WALL_CHAR);
+	terminal_put(x_pos-2, y_pos, WALL_CHAR);
+	
+	gameWorld[x_pos-1][y_pos] = SHALL_NOT_PASS;
+	gameWorld[x_pos-2][y_pos] = SHALL_NOT_PASS;
+	
+	terminal_refresh();
+
+	return 1;
+  
+}
 
 /*
     What other functions do you need to make the game work?  What can you
