@@ -9,6 +9,7 @@ Begining of file - gooseEscapeMain.cpp
 #include <ctime> //for the random seed
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 using namespace std;
 #include "gooseEscapeUtil.hpp"
 #include "gooseEscapeActors.hpp"
@@ -49,8 +50,17 @@ int main()
 	
 	//declare the array that will hold the game board "map"
     int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
-
+	
+	int totalFence = 0;
+	
+  	ifstream levels("levels.txt");
+  	ifstream winScreen("winScreen.txt");
   	
+  	if(!levels || !winScreen)
+  	{
+  		cout << "files not opened" << endl;
+  		return EXIT_FAILURE;
+	}
   	
 /*
     Initiallize locations in the game board to have game features.  What if you
@@ -60,8 +70,8 @@ int main()
 */
   	
     // Call the function to print the game board
-  	printGameBoard(gameWorld);
-  	
+  	printGameBoard(gameWorld, levels);
+ 
 	// Printing the instructions
     out.writeLine("Escape the Goose! " + monster.get_location_string());
 	out.writeLine("Use the arrow keys to move");
@@ -79,10 +89,14 @@ int main()
 */
     int keyEntered = TK_A; // can be any valid value that is not ESCAPE or CLOSE
     
+	
+    
     //check if player has been captured, won or pressed a certain key
     while(keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE 
-        	&& !captured(player,monster) && !won_game(player, win))
+        	&& !captured(player,monster) && !won_game(player, win, winScreen))
 	{
+		player.display_lives();
+		
 	    //get player key press
 	    keyEntered = terminal_read();
 
@@ -94,6 +108,14 @@ int main()
             //call the goose's chase function
             chase(player, monster, win, gameWorld);// moves the goose	    
         }
+        
+        if(totalFence < 2 && keyEntered == TK_Z)
+        {
+        	
+        	totalFence += electricFencePlacement(gameWorld, player);
+        	
+        	cout << totalFence;
+		}
   	}
 
     if (keyEntered != TK_CLOSE)
@@ -106,7 +128,7 @@ int main()
 		{
 			out.writeLine("You were CAPTURED!");
 		}
-		else if(won_game(player, win))
+		else if(won_game(player, win, winScreen))
 		{
 			out.writeLine("You WIN!");
 		}
@@ -114,6 +136,9 @@ int main()
     	// Wait until user closes the window
         while (terminal_read() != TK_CLOSE);
     }
+    
+    //close the file
+    levels.close();
     
 	//game is done, close it  
     terminal_close();
