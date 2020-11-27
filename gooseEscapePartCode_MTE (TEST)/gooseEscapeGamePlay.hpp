@@ -14,13 +14,14 @@ Start of file - gooseEscapeGamePlay.hpp
 const int EMPTY = 0;
 const int SHALL_NOT_PASS = 1;
 const int WINNER = 2;
-
+const int FENCE = 3;
 //display characters
 const int PLAYER_CHAR = int('@');
 const int MONSTER_CHAR = int('G');
 const int WALL_CHAR = int('o');
 const int WIN_CHAR = int('%');
-
+const int FENCE_CHAR = int('+');
+const int NOTHING_CHAR = int(' ');
 // print the game board function protype
 int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], ifstream & levels);
 
@@ -41,11 +42,13 @@ int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]);
 void chase(Actor & player, Actor & monster, Actor & win, 
 int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]);
 
+int electricFencePlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & player);
 /*
 Does same thing as captured function, except the
 name is better suited for its purpose. 
 */
-bool won_game(Actor & player, Actor & win);
+bool won_game(Actor & player, Actor & win, ifstream & winScreen);
+
 
 #endif
 

@@ -133,7 +133,8 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
     
     //checks to see if it is a valid location to move to
     if (player.can_move(xMove, yMove) 
-      	&& gameWorld[deltax][deltay] != SHALL_NOT_PASS)
+      	&& gameWorld[deltax][deltay] != SHALL_NOT_PASS 
+		&& gameWorld[deltax][deltay] != FENCE)
         player.update_location(xMove, yMove);
 }
 
@@ -178,18 +179,56 @@ void chase(Actor & player, Actor & monster, Actor & win,
 			!(newX == win.get_x() && monster.get_y() == win.get_y()))
 	    	monster.update_location(xMove, 0);
 	}
-
+	
+	if(gameWorld[monster.get_x()][monster.get_y()] == FENCE)
+	{
+		gameWorld[monster.get_x()][monster.get_y()] = EMPTY;
+		terminal_clear_area(monster.get_x(),monster.get_y(), 1, 1);
+	    monster.caught();
+	    
+	}
 
 }
 
 //function that allows the player to win
-bool won_game(Actor & player, Actor & win)
+bool won_game(Actor & player, Actor & win, ifstream & winScreen)
 {
+	
 	//checks to see if the player's location is the same as the win point
 	if(player.get_x() == win.get_x() && player.get_y() == win.get_y())
+	{
+		/*
+		for(int row = 0; row < MAX_BOARD_Y; row++)
+		{
+			for(int col = 0; col < MAX_BOARD_X; col++)
+			{
+				terminal_put(col, row, WALL_CHAR);
+			}
+		}
+		*/
+		
 		return 1;
+	}
 	else
-		return 0;
+	{
+		return 0;	
+	}
+
+}
+
+int electricFencePlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & player)
+{
+
+	int x_pos = player.get_x();
+	int y_pos = player.get_y();
+		
+	terminal_put(x_pos+1, y_pos, FENCE_CHAR);
+	gameWorld[x_pos+1][y_pos] = FENCE;
+	
+	terminal_refresh();
+
+	return 1;
+  
 }
 
 /*

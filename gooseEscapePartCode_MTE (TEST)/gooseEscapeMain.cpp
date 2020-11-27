@@ -50,10 +50,13 @@ int main()
 	
 	//declare the array that will hold the game board "map"
     int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
-
+	
+	int totalFence = 0;
+	
   	ifstream levels("levels.txt");
+  	ifstream winScreen("winScreen.txt");
   	
-  	if(!levels)
+  	if(!levels || !winScreen)
   	{
   		cout << "files not opened" << endl;
   		return EXIT_FAILURE;
@@ -66,14 +69,12 @@ int main()
     function as well?
 */
   	
-    // Call the function to print the game board
-  	//printGameBoard(gameWorld, levels);
-  	
+
 	// Printing the instructions
     out.writeLine("Escape the Goose! " + monster.get_location_string());
 	out.writeLine("Arrow keys to move");
 	out.writeLine("Health (^) bottom left. Get caught, lose a life. 3 lives. 0 lives = lose");
-	out.writeLine("Stuff");
+	out.writeLine("Press Z to put down an electric fence");
 
 /*
     This is the main game loop.  It continues to let the player give input
@@ -88,7 +89,7 @@ int main()
         
     //check if player has been captured, won or pressed a certain key
     while(keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE 
-        	&& !captured(player,monster) && !won_game(player, win))
+        	&& !captured(player,monster) && !won_game(player, win, winScreen))
 	{
 		player.display_lives();
 		
@@ -106,6 +107,14 @@ int main()
             //call the goose's chase function
             chase(player, monster, win, gameWorld);// moves the goose	    
         }
+        
+        if(totalFence < 2 && keyEntered == TK_Z)
+        {
+        	
+        	totalFence += electricFencePlacement(gameWorld, player);
+        	
+        	cout << totalFence;
+		}
   	}
 
     if (keyEntered != TK_CLOSE)
@@ -118,7 +127,7 @@ int main()
 		{
 			out.writeLine("You were CAPTURED!");
 		}
-		else if(won_game(player, win))
+		else if(won_game(player, win, winScreen))
 		{
 			out.writeLine("You WIN!");
 		}
