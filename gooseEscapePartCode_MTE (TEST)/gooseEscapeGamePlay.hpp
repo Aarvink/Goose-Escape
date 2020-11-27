@@ -47,7 +47,7 @@ int electricFencePlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & play
 Does same thing as captured function, except the
 name is better suited for its purpose. 
 */
-bool won_game(Actor & player, Actor & win, ifstream & winScreen);
+bool won_game(Actor & player, Actor & win);
 
 
 #endif
