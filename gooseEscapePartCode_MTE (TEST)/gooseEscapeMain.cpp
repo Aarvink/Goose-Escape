@@ -23,9 +23,6 @@ int main()
 {
 	//putting in the random seed-the starting point for random numbers
 	srand((unsigned) time(0));
-	
-	//Set up the window.  Don't edit these two lines
-
 
 /*
     The code below provides a skeleton of the game play.  You will need to
