@@ -194,6 +194,9 @@ void chase(Actor & player, Actor & monster, Actor & win,
 bool won_game(Actor & player, Actor & win, ifstream & winScreen)
 {
 	
+	const int SIZE_OF_STRING = 14;
+	char message[SIZE_OF_STRING] = "won the level";
+	
 	//checks to see if the player's location is the same as the win point
 	if(player.get_x() == win.get_x() && player.get_y() == win.get_y())
 	{
@@ -202,10 +205,15 @@ bool won_game(Actor & player, Actor & win, ifstream & winScreen)
 		{
 			for(int col = 0; col < MAX_BOARD_X; col++)
 			{
-				terminal_put(col, row, WALL_CHAR);
+				terminal_put(col, row, NOTHING_CHAR);
 			}
 		}
 		
+		for(int iter = 0; iter < SIZE_OF_STRING; iter++)
+		{
+			terminal_put(MAX_BOARD_X/2 + iter, MAX_BOARD_Y/2, int(message[iter]));
+		}
+
 		
 		return 1;
 	}
@@ -230,6 +238,8 @@ int electricFencePlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & play
 	return 1;
   
 }
+
+
 
 /*
     What other functions do you need to make the game work?  What can you

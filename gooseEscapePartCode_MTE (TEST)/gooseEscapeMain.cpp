@@ -52,6 +52,7 @@ int main()
     int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
 	
 	int totalFence = 0;
+
 	
   	ifstream levels("levels.txt");
   	ifstream winScreen("winScreen.txt");
@@ -109,12 +110,10 @@ int main()
         }
         
         if(totalFence < 2 && keyEntered == TK_Z)
-        {
-        	
+        {	
         	totalFence += electricFencePlacement(gameWorld, player);
-        	
-        	cout << totalFence;
 		}
+		
   	}
 
     if (keyEntered != TK_CLOSE)
