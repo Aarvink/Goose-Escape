@@ -61,9 +61,7 @@ int main()
 		const int FILE_NAME_SIZE = 10;
 		char file_name[] = "level0.txt";
 		file_name[CHANGE_NUM] = level_num+'0';
-		
-		cout << file_name << endl;
-		
+				
 	  	ifstream levels(file_name);
 	  	
 	  	if(!levels)
@@ -82,9 +80,9 @@ int main()
 	
 		// Printing the instructions
 	    out.writeLine("Escape the Goose! " + monster.get_location_string());
-		out.writeLine("Arrow keys to move");
-		out.writeLine("Health (^) bottom left. Get caught, lose a life. 3 lives. 0 lives = lose");
-		out.writeLine("Press Z to put down an electric fence");
+		out.writeLine("Move w/ arrow keys. Lives (^) on bottom left");
+		out.writeLine("Caught = lose life. 3 lives. 0 lives=lose");
+		out.writeLine("Press Z=electric fence. If won level close window to get new level");
 	
 	/*
 	    This is the main game loop.  It continues to let the player give input
