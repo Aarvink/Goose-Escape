@@ -42,7 +42,6 @@ y direction
 //print the game board function
 int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], ifstream & levels)
 {		
-	
 	int x_pos = 0, y_pos = 0;
 		
 	for(int newlines = 0; newlines < MAX_BOARD_Y; newlines++)
@@ -56,7 +55,9 @@ int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], ifstream & levels)
 		{
 			for(int iter_str = 0; iter_str < line_in.size(); iter_str++)
 			{
-				if(line_in[iter_str] == WALL_CHAR && x_pos < MAX_BOARD_X && y_pos < MAX_BOARD_Y && x_pos > MIN_BOARD_X && y_pos > MIN_BOARD_Y)
+				if(line_in[iter_str] == WALL_CHAR && x_pos < MAX_BOARD_X && 
+					y_pos < MAX_BOARD_Y && x_pos > MIN_BOARD_X && 
+					y_pos > MIN_BOARD_Y)
 				{
 					gameWorld[x_pos][y_pos] = SHALL_NOT_PASS;
 					terminal_put(x_pos, y_pos, WALL_CHAR);
@@ -82,17 +83,21 @@ int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], ifstream & levels)
 //function that allows the goose to capture the player
 bool captured(Actor & player, Actor & monster)
 {
-	
+	//checks to see if a life can be taken off the player
 	if((player.get_x() == monster.get_x() 
-        && player.get_y() == monster.get_y())){
-		if(player.lives_left()){
+        && player.get_y() == monster.get_y()))
+	{
+		if(player.lives_left())
+		{
 			player.caught();
-			//cout << player.lives_left();
+			
 			return 0;
-		}else
+		}
+		else
+		{
 			return 1;
+		}
 	}
-	
 	return 0;
 }
 
@@ -106,7 +111,8 @@ bool captured(Actor & player, Actor & monster)
     A look-up table might be useful.
     You could decide to learn about switch statements and use them here.
 */
-// function that allows the player to move
+
+//function that allows the player to move
 void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])
 {
 	//checks for button pressed
@@ -131,9 +137,9 @@ void movePlayer(int key, Actor & player, int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]
         player.update_location(xMove, yMove);
 }
 
-// Function that allows the goose to chase the player 
+//function that allows the goose to chase the player 
 void chase(Actor & player, Actor & monster, Actor & win, 
-			int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])
+		   int gameWorld[MAX_BOARD_X][MAX_BOARD_Y])
 {
     int yMove = 0, xMove = 0;
     
@@ -173,27 +179,28 @@ void chase(Actor & player, Actor & monster, Actor & win,
 	    	monster.update_location(xMove, 0);
 	}
 	
+	//checks to see if goose lands on an electric fence 
 	if(gameWorld[monster.get_x()][monster.get_y()] == FENCE)
 	{
+		//remove the fence and make the goose lose a life
 		gameWorld[monster.get_x()][monster.get_y()] = EMPTY;
 		terminal_clear_area(monster.get_x(),monster.get_y(), 1, 1);
 	    monster.caught();
-	    
 	}
 
 }
 
-//function that allows the player to win
+//New Function #1: function that allows the player to win
 bool won_game(Actor & player, Actor & win)
 {
-	
+	//creates the win message 
 	const int SIZE_OF_STRING = 14;
 	char message[SIZE_OF_STRING] = "won the level";
 	
 	//checks to see if the player's location is the same as the win point
 	if(player.get_x() == win.get_x() && player.get_y() == win.get_y())
 	{
-		
+		//makes the gameplay screen empty
 		for(int row = 0; row < MAX_BOARD_Y; row++)
 		{
 			for(int col = 0; col < MAX_BOARD_X; col++)
@@ -202,12 +209,12 @@ bool won_game(Actor & player, Actor & win)
 			}
 		}
 		
+		//adds the win message to the screen
 		for(int iter = 0; iter < SIZE_OF_STRING; iter++)
 		{
 			terminal_put(MAX_BOARD_X/2 + iter, MAX_BOARD_Y/2, int(message[iter]));
 		}
 
-		
 		return 1;
 	}
 	else
@@ -217,12 +224,14 @@ bool won_game(Actor & player, Actor & win)
 
 }
 
+//New Function #2: function that allows the player to place an electric fence down
 int electricFencePlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & player)
 {
-
+	//gets position of player
 	int x_pos = player.get_x();
 	int y_pos = player.get_y();
-		
+	
+	//places a fence to the right of the player
 	terminal_put(x_pos+1, y_pos, FENCE_CHAR);
 	gameWorld[x_pos+1][y_pos] = FENCE;
 	
@@ -232,12 +241,14 @@ int electricFencePlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & play
   
 }
 
+//New Function #3: function that allows the player to place down a wall
 int wallPlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & player)
 {
-
+	//get the players location
 	int x_pos = player.get_x();
 	int y_pos = player.get_y();
 	
+	//creates a wall to the left of the player that is two tiles long
 	terminal_put(x_pos-1, y_pos, WALL_CHAR);
 	terminal_put(x_pos-2, y_pos, WALL_CHAR);
 	

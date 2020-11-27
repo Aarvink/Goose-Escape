@@ -55,6 +55,10 @@ int main()
 		//declare the array that will hold the game board "map"
 	    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
 		
+		//declare constants to limit amount of fence and walls placed
+		const int MAX_FENCE = 2;
+		const int MAX_WALL = 1;
+		
 		//declare variables to limit amount of fence and walls placed
 		int totalFence = 0;
 		int totalWall = 0;
@@ -120,11 +124,11 @@ int main()
 	            chase(player, monster, win, gameWorld);// moves the goose	    
 	        }
 	        
-	        if(totalFence < 2 && keyEntered == TK_Z)
+	        if(totalFence < MAX_FENCE && keyEntered == TK_Z)
 	        {
 	        	totalFence += electricFencePlacement(gameWorld, player);
 			}
-			if(totalWall < 1 && keyEntered == TK_X)
+			if(totalWall < MAX_WALL && keyEntered == TK_X)
 	        {	
 	        	totalWall += wallPlacement(gameWorld, player);
 			}
