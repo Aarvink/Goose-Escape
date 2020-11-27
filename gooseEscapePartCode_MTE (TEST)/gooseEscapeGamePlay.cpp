@@ -41,21 +41,14 @@ y direction
 
 //print the game board function
 int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], ifstream & levels)
-{	
-    //create a vertical wall of 10 tiles on the game board
-//    for(int count = 0; count < 10; count++)
-//    {
-//    	gameWorld[40][8 + count] = SHALL_NOT_PASS;
-//    	terminal_put(40, 8 + count, WALL_CHAR);
-//    	
-//	}
-	
-	string line_in;
+{		
 	
 	int x_pos = 0, y_pos = 0;
 		
 	for(int newlines = 0; newlines < MAX_BOARD_Y; newlines++)
-	{
+	{	
+		string line_in;
+		
 		x_pos = 0;
 		getline(levels, line_in);
 		

@@ -50,10 +50,28 @@ class Actor
     }
     
     //new constructor-creates actor with random position
-    Actor(char initPlayerChar)
+    Actor(char initPlayerChar, int given_lives)
     {
-    	const int MAX_LIVES = 3;
-    	lives = MAX_LIVES;
+    	lives = given_lives;
+    	
+		change_char(initPlayerChar);
+    	
+    	const int border_dist = 5;
+    	
+    	//assigns a random position to the actor
+		int x0 = rand_pos(MIN_BOARD_X+border_dist, MAX_BOARD_X-border_dist);
+    	int y0 = rand_pos(MIN_BOARD_Y+border_dist, MAX_BOARD_Y-border_dist);
+    	    	
+    	location_x = 0;
+    	location_y = 0;
+    	
+		update_location(x0, y0);
+	}
+	
+	Actor (char initPlayerChar){
+		
+		const int DEFAULT_LIVES = 3;
+		lives = DEFAULT_LIVES;
     	
 		change_char(initPlayerChar);
     	
