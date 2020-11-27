@@ -22,6 +22,7 @@ const int WALL_CHAR = int('o');
 const int WIN_CHAR = int('%');
 const int FENCE_CHAR = int('+');
 const int NOTHING_CHAR = int(' ');
+
 // print the game board function protype
 int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], ifstream & levels);
 
@@ -36,6 +37,7 @@ int printGameBoard(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], ifstream & levels);
 bool captured(Actor & player, Actor & monster);
 
 void movePlayer(int key, Actor & player, 
+
 int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]);
 
 //added win to the chase, so that goose will not be able to move over it. 
@@ -43,6 +45,8 @@ void chase(Actor & player, Actor & monster, Actor & win,
 int gameWorld[MAX_BOARD_X][MAX_BOARD_Y]);
 
 int electricFencePlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & player);
+
+int wallPlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & player);
 /*
 Does same thing as captured function, except the
 name is better suited for its purpose. 

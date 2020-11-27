@@ -36,10 +36,11 @@ int main()
     you have added to the Actor class.
 */
 	const int NUM_LEVELS = 2;
-	int player_lives = 3;
+	int player_lives = 3; //to keep track even as levels change
  	
  	//following constructors generate random position
-    for(int level_num = 1; level_num <= NUM_LEVELS; level_num++){
+    for(int level_num = 1; level_num <= NUM_LEVELS; level_num++)
+	{
 		terminal_open();
   		terminal_set(SETUP_MESSAGE);
 	  
@@ -55,15 +56,28 @@ int main()
 		//declare the array that will hold the game board "map"
 	    int gameWorld[MAX_BOARD_X][MAX_BOARD_Y] = {EMPTY};
 		
+		//declare variables to limit amount of fence and walls placed
 		int totalFence = 0;
+		int totalWall = 0;
 		
+		/*
+		the text files for the levels are named
+		levelA.txt, where A is 1, 2, 3, etc. 
+		Each time the loop goes around, the next level is called
+		*/
+		//index of thing to be changed
 		const int CHANGE_NUM = 5;
+		const char CONVERT_ASCII = '0';
 		const int FILE_NAME_SIZE = 10;
+		//could not use a string as ifstream does not accept a string
 		char file_name[] = "level0.txt";
-		file_name[CHANGE_NUM] = level_num+'0';
-				
+		//this changes the file name at the correct index
+		//int+'0' equals the ASCII for the specific number
+		file_name[CHANGE_NUM] = level_num+CONVERT_ASCII;
+		
 	  	ifstream levels(file_name);
 	  	
+	  	//checks if file is open
 	  	if(!levels)
 	  	{
 	  		cout << "file not opened" << endl;
@@ -79,7 +93,7 @@ int main()
 	  	
 	
 		// Printing the instructions
-	    out.writeLine("Escape the Goose! " + monster.get_location_string());
+	    out.writeLine("Escape the Goose! "+monster.get_location_string());
 		out.writeLine("Move w/ arrow keys. Lives (^) on bottom left");
 		out.writeLine("Caught = lose life. 3 lives. 0 lives=lose");
 		out.writeLine("Press Z=electric fence. If won level close window to get new level");
@@ -102,6 +116,7 @@ int main()
 	    while(keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE 
 	        	&& !captured(player,monster) && !won_game(player, win))
 		{
+			//shows player lives on bottom left
 			player.display_lives();
 			
 		    //get player key press
@@ -118,40 +133,42 @@ int main()
 	        
 	        if(totalFence < 2 && keyEntered == TK_Z)
 	        {
-	        	
 	        	totalFence += electricFencePlacement(gameWorld, player);
-	        	
-	        	cout << totalFence;
 			}
+			if(totalWall < 1 && keyEntered == TK_X)
+	        {	
+	        	totalWall += wallPlacement(gameWorld, player);
+			}
+			
 	  	}
 	
 	    if (keyEntered != TK_CLOSE)
-	    {
-	      	//once we're out of the loop, the game is over
-	        out.writeLine("Game has ended");
-	    
-	        //outputs whether the player reached the win point or was captured
-			if(captured(player,monster))
-			{
-				out.writeLine("You were CAPTURED!");
-			}
-			else if(won_game(player, win))
-			{
-				out.writeLine("You WIN!");
-			}
-			
-	    	// Wait until user closes the window
-	        while (terminal_read() != TK_CLOSE);
-	    } 
-		
-		player_lives = player.lives_left();
-		
-		//close the file
-    	levels.close();	
-		
-		//game is done, close it  
-    	terminal_close();
-	}
+        {
+            //once we're out of the loop, the game is over
+            out.writeLine("Game has ended");
+
+            //outputs whether the player reached the win point or was captured
+            if(captured(player,monster))
+            {
+                out.writeLine("You were CAPTURED!");
+            }
+            else if(won_game(player, win))
+            {
+                out.writeLine("You WIN!");
+            }
+
+            // Wait until user closes the window
+            while (terminal_read() != TK_CLOSE);
+        }
+
+        player_lives = player.lives_left();
+
+        //close the file
+        levels.close();    
+
+        //game is done, close it  
+        terminal_close();
+    }
 	
 }
 

@@ -50,6 +50,7 @@ class Actor
     }
     
     //new constructor-creates actor with random position
+    //also can input number of lives actor has
     Actor(char initPlayerChar, int given_lives)
     {
     	lives = given_lives;
@@ -68,6 +69,7 @@ class Actor
 		update_location(x0, y0);
 	}
 	
+	//new constructor - creates actor with random position
 	Actor (char initPlayerChar){
 		
 		const int DEFAULT_LIVES = 3;
@@ -87,6 +89,7 @@ class Actor
 		update_location(x0, y0);
 	}
 	
+	//new function
 	//if the actor has lives, this will be true
 	int lives_left() const
 	{
@@ -96,18 +99,21 @@ class Actor
 			return 0;
 	}
     
+    //new function
     //call this when the actor is caught
     void caught()
 	{
-		
+		//makes it so that the lives update each time
 		for(int iter = 0; iter < lives; iter++)
     	{
     		terminal_put(iter, MAX_BOARD_Y, ' ');
     		terminal_refresh();
 		}
 		
+		//reduces the lives by one each time
     	lives -= 1;
     	
+    	//following places the player in a random position
     	const int border_dist = 5;
     	
     	int x0 = rand_pos(MIN_BOARD_X+border_dist, MAX_BOARD_X-border_dist);
@@ -120,6 +126,7 @@ class Actor
     	
 	}
     
+    //new function
     //returns a random number between a range
     int rand_pos(int min, int max) const
 	{
@@ -150,12 +157,15 @@ class Actor
         return formatted_location;
     }
     
+    //new function
+    //displays lives on the bottom left corner
     void display_lives()
     {
-		const int heart = int('^');
+    	//the heart is a ^
+		const int HEART = int('^');
 		for(int iter = 0; iter < lives; iter++)
 		{
-			terminal_put(iter, MAX_BOARD_Y, heart);
+			terminal_put(iter, MAX_BOARD_Y, HEART);
         	terminal_refresh();
 		}
 	}

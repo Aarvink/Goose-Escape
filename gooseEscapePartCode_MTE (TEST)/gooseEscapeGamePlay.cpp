@@ -206,6 +206,7 @@ bool won_game(Actor & player, Actor & win)
 		{
 			terminal_put(MAX_BOARD_X/2 + iter, MAX_BOARD_Y/2, int(message[iter]));
 		}
+
 		
 		return 1;
 	}
@@ -224,6 +225,24 @@ int electricFencePlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & play
 		
 	terminal_put(x_pos+1, y_pos, FENCE_CHAR);
 	gameWorld[x_pos+1][y_pos] = FENCE;
+	
+	terminal_refresh();
+
+	return 1;
+  
+}
+
+int wallPlacement(int gameWorld[MAX_BOARD_X][MAX_BOARD_Y], Actor & player)
+{
+
+	int x_pos = player.get_x();
+	int y_pos = player.get_y();
+	
+	terminal_put(x_pos-1, y_pos, WALL_CHAR);
+	terminal_put(x_pos-2, y_pos, WALL_CHAR);
+	
+	gameWorld[x_pos-1][y_pos] = SHALL_NOT_PASS;
+	gameWorld[x_pos-2][y_pos] = SHALL_NOT_PASS;
 	
 	terminal_refresh();
 
