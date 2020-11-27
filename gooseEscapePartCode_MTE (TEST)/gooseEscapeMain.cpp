@@ -67,13 +67,13 @@ int main()
 */
   	
     // Call the function to print the game board
-  	printGameBoard(gameWorld, levels);
+  	//printGameBoard(gameWorld, levels);
   	
 	// Printing the instructions
     out.writeLine("Escape the Goose! " + monster.get_location_string());
-	out.writeLine("Use the arrow keys to move");
-	out.writeLine("If the goose catches you, you lose!");
-	out.writeLine("Be careful! Sometimes the goose can jump through walls!");
+	out.writeLine("Arrow keys to move");
+	out.writeLine("Health (^) bottom left. Get caught, lose a life. 3 lives. 0 lives = lose");
+	out.writeLine("Stuff");
 
 /*
     This is the main game loop.  It continues to let the player give input
@@ -85,14 +85,15 @@ int main()
     key being pressed.
 */
     int keyEntered = TK_A; // can be any valid value that is not ESCAPE or CLOSE
-    
-	
-    
+        
     //check if player has been captured, won or pressed a certain key
     while(keyEntered != TK_ESCAPE && keyEntered != TK_CLOSE 
         	&& !captured(player,monster) && !won_game(player, win))
 	{
 		player.display_lives();
+		
+		// Call the function to print the game board
+  		printGameBoard(gameWorld, levels);
 		
 	    //get player key press
 	    keyEntered = terminal_read();
