@@ -197,15 +197,15 @@ bool won_game(Actor & player, Actor & win, ifstream & winScreen)
 	//checks to see if the player's location is the same as the win point
 	if(player.get_x() == win.get_x() && player.get_y() == win.get_y())
 	{
-		/*
+		
 		for(int row = 0; row < MAX_BOARD_Y; row++)
 		{
 			for(int col = 0; col < MAX_BOARD_X; col++)
 			{
-				terminal_put(col, row, WALL_CHAR);
+				terminal_put(col, row, NOTHING_CHAR);
 			}
 		}
-		*/
+		
 		
 		return 1;
 	}

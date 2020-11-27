@@ -12,7 +12,7 @@ CursorCol=27
 CursorRow=136
 TopLine=147
 LeftChar=1
-Focused=-1
+Focused=5
 [Editors]
 Order=0,5,4,1,2
 >>>>>>> c647786429a0402d283274baefdfec7a24b9f623
@@ -35,7 +35,7 @@ Focused=5
 <<<<<<< HEAD
 CursorCol=43
 CursorRow=52
-TopLine=41
+TopLine=5
 =======
 CursorCol=3
 CursorRow=67
@@ -60,9 +60,9 @@ CursorRow=17
 TopLine=7
 LeftChar=1
 [Editor_5]
-CursorCol=1
-CursorRow=207
-TopLine=198
+CursorCol=3
+CursorRow=208
+TopLine=196
 =======
 CursorCol=33
 CursorRow=10
